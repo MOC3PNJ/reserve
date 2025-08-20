@@ -1,218 +1,372 @@
+/* === NEWPLAYER.CSS - REDISEÑO PREMIUM STREAMING === */
+
+/* --- 1. VARIABLES GLOBALES Y CONFIGURACIÓN BASE --- */
 :root {
-            --primary-color: #00aaff;
-            --primary-color-dark: #0088cc;
-            --background-color: #10111a;
-            --surface-color: #1a1b26;
-            --surface-color-light: #2a2c3a;
-            --text-color: #e0e0e0;
-            --text-color-secondary: #a0a0b0;
-            --border-color: #303240;
-            --shadow-color: rgba(0, 0, 0, 0.5);
-            --font-family: 'Inter', sans-serif;
-        }
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            min-height: 100vh;
-            background-color: var(--background-color);
-            background-image: radial-gradient(circle at 20% 20%, rgba(0, 170, 255, 0.1), transparent 30%);
-            font-family: var(--font-family);
-            color: var(--text-color);
-        }
-        .app-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 20px;
-        }
-        .app-header {
-            width: 100%;
-            max-width: 900px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .app-logo {
-            height: 50px;
-            width: 50px;
-            border-radius: 8px;
-        }
-        .app-title {
-            font-size: 2em;
-            font-weight: 700;
-            color: var(--text-color);
-            margin: 0;
-        }
-        .main-container {
-            width: 100%;
-            max-width: 900px;
-            padding: 30px;
-            background-color: var(--surface-color);
-            border-radius: 16px;
-            box-shadow: 0 10px 40px var(--shadow-color);
-            border: 1px solid var(--border-color);
-        }
-        h1.content-title {
-            font-size: 2.5em;
-            font-weight: 700;
-            margin: 0 0 25px 0;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-color);
-            line-height: 1.2;
-        }
-        .section-title {
-            font-size: 1.6em;
-            margin: 30px 0 15px 0;
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-        .player-controls {
-            background-color: var(--surface-color-light);
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 30px;
-            border: 1px solid var(--border-color);
-        }
-        .player-controls .title {
-            font-size: 1.3em;
-            font-weight: 700;
-            margin: 0 0 20px 0;
-            word-break: break-word;
-        }
-        .controls-grid {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 15px 20px;
-            align-items: center;
-        }
-        label {
-            font-weight: 500;
-            color: var(--text-color-secondary);
-            font-size: 1em;
-        }
-        .select-wrapper {
-            position: relative;
-        }
-        select#quality-selector {
-            width: 100%;
-            padding: 12px 40px 12px 15px;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1em;
-            appearance: none;
-            -webkit-appearance: none;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-        select#quality-selector:hover {
-            border-color: var(--primary-color);
-        }
-        .select-wrapper::after {
-            content: '\f078';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            top: 50%;
-            right: 15px;
-            transform: translateY(-50%);
-            color: var(--text-color-secondary);
-            pointer-events: none;
-        }
-        a.play-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            grid-column: 1 / -1;
-            padding: 15px 25px;
-            background: linear-gradient(45deg, var(--primary-color-dark), var(--primary-color));
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
-        }
-        a.play-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 170, 255, 0.3);
-        }
-        a.play-button i { margin-right: 12px; }
+    /* Paleta de colores refinada */
+    --primary-color: #00aaff; /* Azul vibrante para acentos clave */
+    --primary-glow-color: rgba(0, 170, 255, 0.5); /* Color para brillos y sombras */
+    --secondary-accent-color: #e60073; /* Un acento secundario para micro-interacciones (opcional) */
+    
+    --background-color-dark: #0a0b10; /* Fondo principal, más oscuro y profundo */
+    --glass-surface-color: rgba(26, 27, 38, 0.6); /* Superficie de cristal semi-transparente */
+    --glass-border-color: rgba(255, 255, 255, 0.1); /* Borde sutil para el efecto de cristal */
 
-        .list-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 12px;
-        }
-        .list-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            background-color: var(--surface-color-light);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-            justify-content: center;
-            font-weight: 500;
-        }
-        .list-item:hover {
-            background-color: var(--surface-color);
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-        .list-item.active {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            color: #fff;
-            font-weight: bold;
-            cursor: default;
-            box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
-        }
+    --text-color-primary: #f0f2f5; /* Blanco ligeramente suavizado para texto principal */
+    --text-color-secondary: #a0a0b0; /* Gris claro para texto secundario y etiquetas */
+    --text-gradient: linear-gradient(180deg, var(--text-color-primary), #d1d5db);
 
-        #loading-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(16, 17, 26, 0.8);
-            backdrop-filter: blur(5px);
-            display: none; justify-content: center; align-items: center; z-index: 1000;
-        }
-        .spinner {
-            border: 6px solid rgba(255, 255, 255, 0.2);
-            border-top: 6px solid var(--primary-color);
-            border-radius: 50%;
-            width: 60px; height: 60px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    /* Sombras suaves y realistas */
+    --shadow-deep: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    --shadow-interactive: 0 10px 20px -5px var(--primary-glow-color);
 
-        @media (max-width: 768px) {
-            .main-container { padding: 20px; }
-            h1.content-title { font-size: 2em; }
-            .section-title { font-size: 1.4em; }
-            .list-container { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-        }
-        @media (max-width: 480px) {
-            .app-wrapper { padding: 10px; }
-            .app-header { margin-bottom: 10px; padding-bottom: 10px; }
-            .app-logo { height: 40px; width: 40px; }
-            .app-title { font-size: 1.5em; }
-            .main-container { padding: 15px; border-radius: 12px; }
-            h1.content-title { font-size: 1.6em; }
-            .controls-grid { grid-template-columns: 1fr; }
-            a.play-button { font-size: 1.1em; }
-            .list-container { gap: 8px; }
-            .list-item { padding: 10px; font-size: 0.9em; }
-        }
+    /* Tipografía y Transiciones */
+    --font-family: 'Inter', sans-serif;
+    --transition-curve: cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-speed: 0.3s;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* --- 2. FONDO DINÁMICO Y ESTILOS DEL BODY --- */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    font-family: var(--font-family);
+    color: var(--text-color-primary);
+    background-color: var(--background-color-dark);
+    overflow-x: hidden; /* Previene el desbordamiento horizontal */
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* Efecto de gradiente de malla animado (Aurora Boreal) */
+    background: 
+        radial-gradient(ellipse 40% 50% at 20% 25%, rgba(0, 170, 255, 0.2), transparent),
+        radial-gradient(ellipse 40% 50% at 80% 60%, rgba(230, 0, 115, 0.15), transparent),
+        radial-gradient(ellipse 30% 40% at 50% 90%, rgba(0, 100, 255, 0.1), transparent);
+    animation: background-pan 30s linear infinite alternate;
+}
+
+@keyframes background-pan {
+    0% { transform: translate(0%, 10%) scale(1.2); }
+    100% { transform: translate(-10%, -10%) scale(1.2); }
+}
+
+/* --- 3. CONTENEDORES Y LAYOUT PRINCIPAL --- */
+.app-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 1rem;
+    transition: opacity var(--transition-speed) ease-in-out;
+}
+
+/* Clase para transiciones de contenido con JS */
+.app-wrapper.content-loading {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.app-header {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--glass-border-color);
+}
+
+.app-logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 12px;
+}
+
+.app-title {
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--text-color-primary);
+    margin: 0;
+}
+
+/* --- 4. EFECTO GLASSMORPHISM Y CONTENEDOR PRINCIPAL --- */
+.main-container {
+    width: 100%;
+    max-width: 900px;
+    padding: 2.5rem;
+    border-radius: 24px; /* Bordes más redondeados */
+    
+    /* Efecto de cristal */
+    background-color: var(--glass-surface-color);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px); /* Soporte para Safari */
+    border: 1px solid var(--glass-border-color);
+    
+    /* Sombra profunda y suave */
+    box-shadow: var(--shadow-deep);
+}
+
+/* --- 5. TIPOGRAFÍA Y JERARQUÍA VISUAL --- */
+h1.content-title {
+    font-size: 3em;
+    font-weight: 800; /* Más impactante */
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--glass-border-color);
+    line-height: 1.1;
+    
+    /* Gradiente de texto sutil */
+    background: var(--text-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.section-title {
+    font-size: 1.6em;
+    margin: 2.5rem 0 1rem 0;
+    color: var(--text-color-primary); /* Blanco, no color primario */
+    font-weight: 700;
+}
+
+/* --- 6. CONTROLES DE REPRODUCCIÓN Y FORMULARIOS --- */
+.player-controls {
+    background-color: rgba(0,0,0,0.2); /* Fondo más integrado */
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-top: 2rem;
+    border: 1px solid var(--glass-border-color);
+}
+
+.player-controls .title {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin: 0 0 1.5rem 0;
+    word-break: break-word;
+}
+
+.controls-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem 1.5rem;
+    align-items: center;
+}
+
+label {
+    font-weight: 500;
+    color: var(--text-color-secondary);
+    font-size: 1em;
+}
+
+/* Rediseño completo del selector de calidad */
+.select-wrapper {
+    position: relative;
+}
+
+select#quality-selector {
+    width: 100%;
+    padding: 12px 40px 12px 15px;
+    background-color: var(--background-color-dark);
+    color: var(--text-color-primary);
+    border: 1px solid var(--glass-border-color);
+    border-radius: 8px;
+    font-size: 1em;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: all var(--transition-speed) var(--transition-curve);
+}
+
+select#quality-selector:hover,
+select#quality-selector:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-glow-color);
+}
+
+.select-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    width: 10px;
+    height: 10px;
+    transform: translateY(-50%) rotate(45deg);
+    border-right: 2px solid var(--text-color-secondary);
+    border-bottom: 2px solid var(--text-color-secondary);
+    pointer-events: none;
+    transition: transform var(--transition-speed) var(--transition-curve);
+}
+
+/* --- 7. BOTÓN DE ACCIÓN PRINCIPAL (PLAY) --- */
+a.play-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    grid-column: 1 / -1;
+    padding: 15px 25px;
+    background: linear-gradient(45deg, var(--primary-color), #0077cc);
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-speed) var(--transition-curve);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+a.play-button:hover,
+a.play-button:focus {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: var(--shadow-interactive);
+}
+
+/* Efecto de brillo en hover */
+a.play-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left var(--transition-speed) ease-in-out;
+}
+
+a.play-button:hover::before {
+    left: 100%;
+}
+
+a.play-button i { margin-right: 12px; }
+
+/* --- 8. LISTAS INTERACTIVAS (EPISODIOS/TEMPORADAS) --- */
+.list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 12px;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 15px;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    border: 1px solid transparent; /* Borde transparente para evitar saltos */
+    cursor: pointer;
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+    transition: all var(--transition-speed) var(--transition-curve);
+}
+
+.list-item:hover {
+    background-color: rgba(0,0,0,0.4);
+    border-color: var(--primary-color);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.list-item.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+    font-weight: bold;
+    cursor: default;
+    box-shadow: 0 4px 15px var(--primary-glow-color);
+}
+
+/* Indicador visual para el elemento activo */
+.list-item.active::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 50%;
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+/* --- 9. OVERLAY DE CARGA SOFISTICADO --- */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 11, 16, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: none; /* Se activa con JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#loading-overlay.visible {
+    display: flex;
+    opacity: 1;
+}
+
+/* Nuevo spinner: tres puntos pulsantes */
+.spinner {
+    display: flex;
+    gap: 10px;
+}
+.spinner div {
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    animation: pulse 1.4s infinite ease-in-out both;
+}
+.spinner div:nth-child(1) { animation-delay: -0.32s; }
+.spinner div:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes pulse {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
+}
+
+/* --- 10. DISEÑO RESPONSIVE --- */
+@media (max-width: 768px) {
+    .main-container { padding: 1.5rem; }
+    h1.content-title { font-size: 2.2em; }
+    .section-title { font-size: 1.4em; }
+    .list-container { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+}
+
+@media (max-width: 480px) {
+    .app-wrapper { padding: 1rem 0.5rem; }
+    .app-header { margin-bottom: 1rem; padding-bottom: 1rem; }
+    .app-logo { height: 40px; width: 40px; }
+    .app-title { font-size: 1.5em; }
+    .main-container { padding: 1rem; border-radius: 16px; }
+    h1.content-title { font-size: 1.8em; }
+    .controls-grid { grid-template-columns: 1fr; }
+    a.play-button { font-size: 1.1em; }
+    .list-container { gap: 8px; }
+    .list-item { padding: 10px; font-size: 0.9em; }
+}
